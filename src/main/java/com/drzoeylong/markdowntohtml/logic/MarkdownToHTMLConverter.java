@@ -48,10 +48,10 @@ public class MarkdownToHTMLConverter {
 		
 	}
 	
-	
+	/*
 	public static void main(String[] args)throws Exception
 	{
 		MarkdownToHTMLConverter test=new MarkdownToHTMLConverter();
 		System.out.println(test.convert("# Sample test\n## case1\n##example:We would like to reach [Google Link](https://google.com) in the browser.\n\n## Sample test2\n## case 2:\nDo you like to use the following link?\n[Google Link](https://google.com)"));
-	}
+	}*/
 }
