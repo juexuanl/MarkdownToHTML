@@ -1,7 +1,107 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JQuery Sample</title>
+        <style type="text/css">
+            input{
+                width: 100%;
+                height: 500px;
+                padding: 5px;
+                margin-left: 10px;
+                background-color: #eee;
+            }
+            textarea{
+                width: 100%;
+                height: 500px;
+                padding: 5px;
+                margin-right: 10px;
+                background-color: #eee;
+            }
+            button{
+                border:  solid 1px green;
+                height: 20px;
+                line-height: 20px;
+                vertical-align: middle;
+                margin-left: 20px;
+            }
+            *{
+                box-sizing: border-box;
+            }
+            .col{
+                flex: 50%;
+                padding: 10px;
+                height: 550px;
+            }
+            .row{
+                display: flex;
+            }
 
-<body>
-<h1>Markdown to HTML Project</h1>
-</body>
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        
+    </head>
+    <body>
+        <div class="row">
+            <div class="col">
+                <h3 id="inputHead">Add content you want<button type="button" onclick="add()">Add</button></h3>
+                <textarea type="text" id="inputTxt" placeholder="Txt needs to be converted"></textarea>
+            </div>
+            <div class="col">
+                <h3 id="outputHead">HTML format:</h3>
+                <textarea id="output" placeholder="output"></textarea>
+            </div>
+        </div>
+            
 
+        <br />
+        <div id="product-info"></div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script> <!-- include jquery library -->
+        <script>
+            const url = "/MarkdownToHTML/converter"; // This is a dummy url for a fake web service that can be used for testing
+
+            // NOTE: the variable $ is the global jquery object
+
+            // Function to add (via POST request) a product
+
+            function add() {
+                let inputTxt = $("#inputTxt").val(); // get title from input
+                if(!inputTxt) {
+                    //alert("Title is required!");
+                    return;
+                }
+                let body = { // request body
+                    data: inputTxt
+                };
+                $.ajax({
+                    url: `${url}/json`,
+                    method: "POST",
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: JSON.stringify(body)
+                })
+                .done(resp => {
+                    console.log(resp);
+                    $("#output").val(resp.result);
+
+                    if(resp.id) {
+                        // fill in the id field for the next (get) request
+                        $("#product-id").val(resp.id);
+                    }
+                })
+                .fail((jqXHR, textStatus) => {
+                    console.error(jqXHR);
+                    console.error(textStatus);
+                    alert("Error! Check console.");
+                });
+            }
+            
+        </script>
+    </body>
 </html>

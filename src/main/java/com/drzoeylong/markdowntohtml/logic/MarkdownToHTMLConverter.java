@@ -52,6 +52,9 @@ public class MarkdownToHTMLConverter {
 	public static void main(String[] args)throws Exception
 	{
 		MarkdownToHTMLConverter test=new MarkdownToHTMLConverter();
-		System.out.println(test.convert("# Sample test\n## case1\n##example:We would like to reach [Google Link](https://google.com) in the browser.\n\n## Sample test2\n## case 2:\nDo you like to use the following link?\n[Google Link](https://google.com)"));
+		System.out.println(test.convert("# Sample document\nHello!\nThis is sample markdown for test [MailChimp](https://mailchimp.com) homework assignment."));
+		System.out.println();
+		System.out.println(test.convert("# Heading 1\nHello there!\nHow are you?\nWhat's going on?\n## Another header\nThis is a paragraph [with an inline link](https://www.google.com). Neat. eh?\n### This is a header [with a link](https://api.drzoeylong.com)"));
+
 	}*/
 }
